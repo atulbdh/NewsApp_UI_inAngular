@@ -1,0 +1,70 @@
+
+<section class="content mx-3">
+  <h3>View News List</h3>
+    <div class="row">
+      
+      <div class="col-xs-12 col-lg-4">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search News" name="searchText"  [(ngModel)]="this.searchText">
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-primary ms-2" (click)="onSearch()"><i
+                  class="fa fa-search"></i>Search
+              </button>
+            </span>
+          </div>
+  
+        </div>
+      </div>
+
+    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-solid">
+            <div class="box-body table-responsive">
+              <table class="table table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th> 
+                    <th scope="col">Description</th> 
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of records; index as i">
+                    <td>{{item.rowNumber}}</td>
+                    <td>{{item.newsTitle}} </td> 
+                    <td>{{item.newsDescription}} </td> 
+                
+                  </tr>
+                  <tr *ngIf="totalRecords == 0">
+                    <td colspan="5" class="text-center">
+                      <span>No records found!</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+    
+            </div>
+          </div>
+          <div class="clearfix">
+            <select class="form-control pull-left" style="width: auto" name="pageSize" [(ngModel)]="_tableState.pageSize"
+              (ngModelChange)="refresh()"> 
+              <option [ngValue]="5">5 items per page</option>
+              <option [ngValue]="10">10 items per page</option>
+              <option [ngValue]="30">30 items per page</option>
+              <option [ngValue]="50">50 items per page</option>
+              <option [ngValue]="70">70 items per page</option>
+              <option [ngValue]="100">100 items per page</option>
+            </select>
+    
+            <ngb-pagination class="pull-right" [collectionSize]="totalRecords" [(page)]="_tableState.pageNumber"
+            [maxSize]="5" [boundaryLinks]="true"  [pageSize]="_tableState.pageSize" (pageChange)="refresh()"></ngb-pagination>
+    
+          </div>
+        </div>
+      </div>
+    
+    
+    </section>
